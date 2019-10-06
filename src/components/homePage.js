@@ -6,7 +6,7 @@ import url from '../constants/endPoints';
 import '../components/homePage.css';
 import { toast } from 'react-toastify';
 
-function HomePage() {
+function HomePage(props) {
   const [data, setData] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [modalType, setModalType] = useState('Add');
@@ -15,7 +15,6 @@ function HomePage() {
   const [unitPrice, setUnitPrice] = useState();
   const [onClickItemData, setOnClickEdit] = useState(false);
   const [clickedItem, setClickedItem] = useState();
-  const [editItem, setEditItem] = useState();
 
   const fetchApiData = () => {
     fetch(url)
@@ -54,7 +53,7 @@ function HomePage() {
     setOnClickEdit(true);
     setClickedItem(item);
   };
-  //handle Remove item
+
   const handleRemove = item => {
     let newList = data.filter(list => item.ProductName !== list.ProductName);
     setData(newList);
@@ -66,13 +65,6 @@ function HomePage() {
       <Redirect to={{ pathname: '/productdetail', data: { clickedItem } }} />
     );
   }
-
-  const handleEditItem = item => {
-    setModalShow(true);
-    setModalType('Edit');
-    setProductName(item.ProductName);
-    setEditItem(item);
-  };
 
   return (
     <div className="container">
@@ -91,7 +83,6 @@ function HomePage() {
         <GetModal
           show={modalShow}
           modalType={modalType}
-          modalData={editItem}
           onHide={e => setModalShow(false)}
           handleCategoryId={e => handleCategoryId(e)}
           handleProductName={e => handleProductName(e)}
@@ -123,9 +114,6 @@ function HomePage() {
                   <p>{item.ProductName}</p>
                 </td>
                 <td>
-                  <Button key={id} onClick={() => handleEditItem(item)}>
-                    Edit
-                  </Button>{' '}
                   <Button
                     variant="danger"
                     key={id}

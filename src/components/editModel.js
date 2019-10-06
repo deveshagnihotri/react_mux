@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Modal, Form } from 'react-bootstrap';
 
-function GetModal(props) {
+function EditModal(props) {
   return (
     <>
       <Modal
@@ -12,7 +12,7 @@ function GetModal(props) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            <h1>Add to Item </h1>
+            <h1>Edit to Item</h1>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -31,8 +31,8 @@ function GetModal(props) {
               <Form.Control
                 type="text"
                 placeholder="Enter ProductName"
-                value={props.productName}
-                onChange={e => props.setProductName(e.target.value)}
+                // value={productName}
+                // onChange={e => setProductName(e.target.value)}
               />
             </Form.Group>
 
@@ -56,7 +56,7 @@ function GetModal(props) {
             type="submit"
             value="Save"
           >
-            Submit
+            Update
           </Button>
           <Button onClick={e => props.onHide}>Close</Button>
         </Modal.Footer>
@@ -65,4 +65,4 @@ function GetModal(props) {
   );
 }
 
-export default GetModal;
+export default EditModal;
